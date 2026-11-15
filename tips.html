@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#F4F7F7">
+    <meta name="description" content="Simple, practical sleep tips to help you wind down, sleep deeper, and wake up feeling more rested.">
+    <title>Circadia — sleep tips</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              mist: "#F4F7F7",
+              navy: "#0F172A",
+              circadia: {
+                indigo: "#3B4CCA",
+                amber: "#F59E0B",
+                line: "#E2E8EB",
+                muted: "#64748B"
+              }
+            },
+            fontFamily: {
+              sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      body { background: #F4F7F7; }
+      button:focus-visible, a:focus-visible, input:focus-visible {
+        outline: 3px solid rgba(59, 76, 202, .3);
+        outline-offset: 3px;
+      }
+      .tip-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,250,252,0.96));
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-mist font-sans text-navy antialiased">
+    <header class="border-b border-slate-200/80 bg-white">
+      <nav class="mx-auto flex h-[82px] max-w-[1280px] items-center justify-between gap-5 px-5 sm:px-8" aria-label="Main navigation">
+        <a href="index.html" class="flex shrink-0 items-center gap-3 no-underline" aria-label="Circadia home">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-navy text-white">
+            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
+              <path d="M20 15.4A8.3 8.3 0 0 1 8.6 4a8.6 8.6 0 1 0 11.4 11.4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16.5 4.5v4m-2-2h4" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="text-[21px] font-bold tracking-[-.7px]">Circadia</span>
+        </a>
+        <div class="flex items-center gap-4 sm:gap-8">
+          <a href="index.html#how-it-works" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">How it works</a>
+          <a href="index.html#report" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">Your report</a>
+          <a href="tips.html" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">Tips</a>
+          <a href="diet/" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">Diet</a>
+          <a href="index.html#upload" class="rounded-lg bg-navy px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 sm:px-5">Analyze my sleep</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="mx-auto max-w-[1120px] px-5 pb-20 pt-9 sm:px-8 sm:pt-12">
+      <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_10px_36px_rgba(15,23,42,.04)] sm:p-10">
+        <p class="inline-flex items-center gap-2 text-[11px] font-bold tracking-[.19em] text-circadia-indigo">
+          <span class="h-px w-5 bg-circadia-indigo"></span> SLEEP TIPS
+        </p>
+        <div class="mt-5 grid gap-8 lg:grid-cols-[1.1fr_.9fr] lg:items-end">
+          <div>
+            <h1 class="text-[38px] font-semibold leading-[1.1] tracking-[-1.8px] text-navy sm:text-[48px]">Small routines that make your mornings feel easier.</h1>
+            <p class="mt-4 max-w-xl text-[17px] leading-7 text-slate-600">
+              Better sleep usually comes from a few consistent habits, not a perfect schedule. Try these practical, low-stress habits to help your body settle earlier and wake up more refreshed.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-indigo-100 bg-indigo-50/60 p-5">
+            <p class="text-[10px] font-bold uppercase tracking-[.15em] text-circadia-indigo">Quick win</p>
+            <p class="mt-3 text-2xl font-semibold tracking-tight text-navy">Aim for a 30-minute wind-down.</p>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Dim lights, put your phone away, and let your brain switch from work mode to rest mode before bed.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <article class="tip-card rounded-[22px] border border-slate-200 p-5 shadow-sm">
+          <div class="grid h-12 w-12 place-items-center rounded-xl bg-indigo-50 text-circadia-indigo">
+            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true"><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h2 class="mt-4 text-xl font-semibold tracking-[-.4px]">Keep a steady rhythm</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Go to bed and wake up around the same time, even on weekends, so your sleep pressure stays predictable.</p>
+        </article>
+
+        <article class="tip-card rounded-[22px] border border-slate-200 p-5 shadow-sm">
+          <div class="grid h-12 w-12 place-items-center rounded-xl bg-amber-50 text-amber-700">
+            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true"><path d="M12 2v10m0 0a4 4 0 1 1 0 8m0-18c4.6 0 8 3 8 7.5S16.6 18 12 18 4 15 4 10.5 7.4 2 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h2 class="mt-4 text-xl font-semibold tracking-[-.4px]">Cut screen glow</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Blue light can push your body clock later. Try dimming screens or enabling night mode in the last hour before sleep.</p>
+        </article>
+
+        <article class="tip-card rounded-[22px] border border-slate-200 p-5 shadow-sm">
+          <div class="grid h-12 w-12 place-items-center rounded-xl bg-slate-200 text-slate-700">
+            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true"><path d="M6 18V9.5A6 6 0 0 1 18 9.5V18M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h2 class="mt-4 text-xl font-semibold tracking-[-.4px]">Make the room sleep-friendly</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Cooler temperatures, blackout curtains, and fewer distractions can help your body feel safe enough to drift off.</p>
+        </article>
+
+        <article class="tip-card rounded-[22px] border border-slate-200 p-5 shadow-sm">
+          <div class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-50 text-emerald-700">
+            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true"><path d="M7 17c0-2.8 2.2-5 5-5s5 2.2 5 5M9 10V8m6 2V8M12 4v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h2 class="mt-4 text-xl font-semibold tracking-[-.4px]">Keep evenings calm</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600">A warm shower, light stretching, or a short wind-down ritual can prime your nervous system for rest.</p>
+        </article>
+      </section>
+
+      <section class="mt-12 grid gap-8 lg:grid-cols-[1fr_1fr]">
+        <div class="rounded-[24px] border border-slate-200 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,.03)] sm:p-8">
+          <p class="text-[10px] font-bold uppercase tracking-[.16em] text-circadia-indigo">The three best habits</p>
+          <ul class="mt-5 space-y-4">
+            <li class="flex gap-3">
+              <span class="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-indigo-50 text-xs font-bold text-circadia-indigo">1</span>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-800">Set a consistent sleep window</h3>
+                <p class="mt-1 text-sm leading-6 text-slate-600">A regular bedtime helps your body clock build a reliable sleep rhythm over time.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-indigo-50 text-xs font-bold text-circadia-indigo">2</span>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-800">Protect the hour before sleep</h3>
+                <p class="mt-1 text-sm leading-6 text-slate-600">Avoid stimulating content, heavy meals, and intense workouts close to bedtime when possible.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-indigo-50 text-xs font-bold text-circadia-indigo">3</span>
+              <div>
+                <h3 class="text-lg font-semibold text-slate-800">Build a repeatable evening ritual</h3>
+                <p class="mt-1 text-sm leading-6 text-slate-600">The same cues — tea, reading, gentle stretches, dim lights — can tell your brain it is time to rest.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rounded-[24px] border border-slate-200 bg-white p-6 shadow-[0_8px_30px_rgba(15,23,42,.03)] sm:p-8">
+          <p class="text-[10px] font-bold uppercase tracking-[.16em] text-circadia-indigo">What to avoid</p>
+          <div class="mt-5 space-y-3">
+            <div class="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-600">Late caffeine or energy drinks in the afternoon or evening.</div>
+            <div class="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-600">Stress-heavy scrolling right before bed when your mind is still racing.</div>
+            <div class="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-600">Very bright lights or noisy environments that keep your body alert.</div>
+            <div class="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm text-slate-600">Sleeping at inconsistent times if you want more stable deep sleep and REM cycles.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-12 rounded-[24px] border border-amber-100 bg-amber-50/60 p-6 sm:p-8">
+        <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p class="text-[10px] font-bold uppercase tracking-[.15em] text-amber-800">A simple routine</p>
+            <h2 class="mt-2 text-2xl font-semibold tracking-tight text-navy">Try this 45-minute wind-down before bed</h2>
+          </div>
+          <a href="index.html#upload" class="inline-flex items-center justify-center rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800">Analyze my sleep</a>
+        </div>
+        <ol class="mt-6 grid gap-4 md:grid-cols-3">
+          <li class="rounded-xl border border-amber-200 bg-white/80 p-4">
+            <span class="text-xs font-bold uppercase tracking-[.12em] text-amber-700">Step 1</span>
+            <p class="mt-2 text-base font-semibold text-slate-800">Turn down the lights</p>
+            <p class="mt-1 text-sm leading-6 text-slate-600">Reduce brightness and avoid intense screens for the final 30–60 minutes.</p>
+          </li>
+          <li class="rounded-xl border border-amber-200 bg-white/80 p-4">
+            <span class="text-xs font-bold uppercase tracking-[.12em] text-amber-700">Step 2</span>
+            <p class="mt-2 text-base font-semibold text-slate-800">Do something calm</p>
+            <p class="mt-1 text-sm leading-6 text-slate-600">Read a few pages, stretch gently, or listen to low-key music without a screen.</p>
+          </li>
+          <li class="rounded-xl border border-amber-200 bg-white/80 p-4">
+            <span class="text-xs font-bold uppercase tracking-[.12em] text-amber-700">Step 3</span>
+            <p class="mt-2 text-base font-semibold text-slate-800">Set the room for sleep</p>
+            <p class="mt-1 text-sm leading-6 text-slate-600">Keep the room cool, quiet, and comfortable, then aim to sleep on a regular schedule.</p>
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="mx-auto flex max-w-[1280px] flex-col gap-2 border-t border-slate-200/80 px-5 pb-10 pt-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+      <span>Circadia · Better mornings start with better nights.</span>
+      <span>Sleep habits are supportive, not medical treatment.</span>
+    </footer>
+  </body>
+</html>

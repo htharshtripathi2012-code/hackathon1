@@ -41,6 +41,40 @@
       .report-bar {
         background: linear-gradient(90deg, #3B4CCA 0%, #6C71E8 75%, #F59E0B 100%);
       }
+      .hero-glow {
+        background: radial-gradient(circle, rgba(99, 102, 241, .14) 0%, rgba(99, 102, 241, 0) 70%);
+        pointer-events: none;
+      }
+      .privacy-banner {
+        animation: banner-in .5s ease-out both;
+      }
+      @keyframes banner-in {
+        from { opacity: 0; transform: translateY(-8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .score-ring {
+        transition: stroke-dashoffset 1.1s cubic-bezier(.22, 1, .36, 1);
+      }
+      .score-tooltip {
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity .15s ease;
+      }
+      .score-help:hover .score-tooltip,
+      .score-help:focus .score-tooltip,
+      .score-help:focus-visible .score-tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+      @media (prefers-color-scheme: dark) {
+        .score-panel { background: #111827 !important; border-color: #334155; }
+        .score-panel h3, .score-panel .score-value { color: #F8FAFC; }
+        .score-panel .score-caption { color: #CBD5E1; }
+        .score-track { stroke: #334155; }
+        #sleep-score-status[data-tone="excellent"] { color: #6EE7B7 !important; }
+        #sleep-score-status[data-tone="fair"] { color: #FCD34D !important; }
+        #sleep-score-status[data-tone="needs-improvement"] { color: #FCA5A5 !important; }
+      }
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
           scroll-behavior: auto !important;
@@ -65,13 +99,33 @@
         <div class="flex items-center gap-4 sm:gap-8">
           <a href="#how-it-works" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">How it works</a>
           <a href="#report" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">Your report</a>
+          <a href="tips.html" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">Tips</a>
+          <a href="diet.html" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">Diet</a>
           <a href="#upload" class="rounded-lg bg-navy px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 sm:px-5">Analyze my sleep</a>
         </div>
       </nav>
     </header>
 
+    <aside id="privacy-banner" class="privacy-banner border-b border-sky-200 bg-sky-50" aria-label="Privacy information">
+      <div class="mx-auto flex max-w-[1280px] items-start gap-3 px-5 py-3.5 sm:items-center sm:px-8">
+        <svg viewBox="0 0 24 24" class="mt-0.5 h-5 w-5 shrink-0 text-sky-700 sm:mt-0" fill="none" aria-hidden="true">
+          <path d="M12 3 4.5 6v5.2c0 4.6 3.2 8.3 7.5 9.8 4.3-1.5 7.5-5.2 7.5-9.8V6L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+          <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="min-w-0 flex-1">
+          <p class="text-sm font-semibold text-sky-950">We are not using your data to train local AI models.</p>
+          <p class="mt-0.5 text-xs leading-5 text-sky-900">Your sleep data is processed solely to generate your personalized report and is never used for AI training. Files are sent to the configured analysis service; review that service’s data policy before uploading sensitive information.</p>
+        </div>
+        <button id="dismiss-privacy" type="button" class="shrink-0 rounded-lg p-2 text-sky-800 transition hover:bg-sky-100" aria-label="Dismiss privacy notice">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </aside>
+
     <main class="mx-auto max-w-[1280px] px-5 pb-16 pt-9 sm:px-8 sm:pt-12">
-      <section class="mb-8 max-w-[760px]" aria-labelledby="page-title">
+      <section class="relative mb-9 overflow-hidden rounded-[28px] border border-indigo-100 bg-gradient-to-br from-white via-white to-indigo-50/80 px-6 py-8 shadow-[0_12px_42px_rgba(59,76,202,.07)] sm:px-10 sm:py-10" aria-labelledby="page-title">
+        <div class="hero-glow absolute -right-14 -top-24 h-72 w-72 rounded-full blur-2xl" aria-hidden="true"></div>
+        <div class="relative max-w-[820px]">
         <p class="inline-flex items-center gap-2 text-[11px] font-bold tracking-[.19em] text-circadia-indigo">
           <span class="h-px w-5 bg-circadia-indigo"></span> A CLEARER WAY TO WIND DOWN
         </p>
@@ -79,8 +133,35 @@
           A better morning<br class="hidden sm:block"> starts tonight.
         </h1>
         <p class="mt-4 max-w-[670px] text-[16px] leading-7 text-slate-600 sm:text-[18px]">
-          Share your sleep data and the time you need to wake up. Get a report with a suggested sleep schedule and an estimate of your REM sleep.
+          Share your sleep data and wake-up time for a personalized view of your sleep schedule, REM estimate, and practical ways to improve your routine.
         </p>
+        <ul class="mt-5 flex flex-wrap gap-2" aria-label="Circadia features">
+          <li class="rounded-full border border-indigo-100 bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-700">✓ REM Estimation</li>
+          <li class="rounded-full border border-indigo-100 bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-700">✓ Sleep Cycle Analysis</li>
+          <li class="rounded-full border border-indigo-100 bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-700">✓ Sleep Schedule Optimization</li>
+          <li class="rounded-full border border-indigo-100 bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-700">✓ Personalized Nutrition Tips</li>
+        </ul>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <a href="#upload" class="inline-flex items-center justify-center rounded-lg bg-circadia-indigo px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-600">Get my sleep plan</a>
+          <a href="tips.html" class="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900">Explore sleep tips</a>
+          <a href="diet.html" class="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900">Sleep diet guide</a>
+        </div>
+        </div>
+      </section>
+
+      <section class="mb-8 grid gap-3 sm:grid-cols-3" aria-label="Our commitments">
+        <article class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-50 text-sky-700"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true"><path d="M12 3 4.5 6v5.2c0 4.6 3.2 8.3 7.5 9.8 4.3-1.5 7.5-5.2 7.5-9.8V6L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><h2 class="text-sm font-semibold text-slate-800">Privacy First</h2><p class="mt-0.5 text-xs leading-5 text-slate-500">Uploads are used to create your report.</p></div>
+        </article>
+        <article class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-indigo-50 text-circadia-indigo"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true"><path d="M5 7h14M7 4h10M7 10v9h10v-9M9 13h6m-6 3h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><h2 class="text-sm font-semibold text-slate-800">Data Deleted After Analysis</h2><p class="mt-0.5 text-xs leading-5 text-slate-500">This page does not retain your file; external service retention may differ.</p></div>
+        </article>
+        <article class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-amber-50 text-amber-700"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true"><path d="M12 3v18m0-14c-4 0-6 2-6 4s2 3 6 3 6 1 6 4-2 4-6 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          <div><h2 class="text-sm font-semibold text-slate-800">Personalized Recommendations</h2><p class="mt-0.5 text-xs leading-5 text-slate-500">Simple guidance shaped around your schedule.</p></div>
+        </article>
       </section>
 
       <section class="grid items-start gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(370px,.92fr)]" aria-label="Sleep analysis">
@@ -177,6 +258,32 @@
               <p id="report-summary" class="mt-2 text-sm leading-6 text-slate-700"></p>
             </div>
 
+            <section class="score-panel mt-5 flex items-center gap-5 rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-indigo-50/70 p-4 sm:gap-7 sm:p-5" aria-labelledby="sleep-score-heading">
+              <div class="relative h-28 w-28 shrink-0 sm:h-32 sm:w-32">
+                <svg viewBox="0 0 120 120" class="h-full w-full -rotate-90" role="img" aria-labelledby="score-svg-title score-svg-description">
+                  <title id="score-svg-title">Sleep score</title>
+                  <desc id="score-svg-description">Score has not been calculated yet.</desc>
+                  <circle class="score-track" cx="60" cy="60" r="48" fill="none" stroke="#E2E8F0" stroke-width="9"/>
+                  <circle id="sleep-score-ring" class="score-ring" cx="60" cy="60" r="48" fill="none" stroke="#3B4CCA" stroke-width="9" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="301.6"/>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                  <span id="sleep-score-value" class="score-value text-3xl font-bold tracking-tight text-navy" aria-live="polite">—</span>
+                  <span class="score-caption text-[10px] font-semibold uppercase tracking-[.12em] text-slate-500">out of 100</span>
+                </div>
+              </div>
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 id="sleep-score-heading" class="text-base font-semibold text-slate-900">Sleep score</h3>
+                  <span class="score-help relative inline-flex" tabindex="0" aria-describedby="score-help-text">
+                    <span class="grid h-5 w-5 cursor-help place-items-center rounded-full border border-slate-300 text-xs font-bold text-slate-600" aria-label="How this score is calculated">?</span>
+                    <span id="score-help-text" role="tooltip" class="score-tooltip absolute left-1/2 top-7 z-20 w-56 -translate-x-1/2 rounded-lg bg-slate-900 px-3 py-2 text-xs leading-5 text-white shadow-lg sm:left-0 sm:translate-x-0">A simple estimate based on your reported sleep duration and the general 7–9 hour adult sleep range. It is not a medical measure.</span>
+                  </span>
+                </div>
+                <p id="sleep-score-status" class="mt-1 text-sm font-semibold text-circadia-indigo">Waiting for analysis</p>
+                <p id="sleep-score-detail" class="mt-1 text-xs leading-5 text-slate-600">Calculated from estimated sleep duration; individual sleep needs vary.</p>
+              </div>
+            </section>
+
             <div class="mt-5 grid grid-cols-2 gap-3">
               <div class="rounded-xl border border-slate-100 bg-slate-50 p-4">
                 <p class="text-[10px] font-bold uppercase tracking-[.12em] text-slate-500">Suggested bedtime</p>
@@ -220,6 +327,16 @@
               <h3 class="text-sm font-semibold text-slate-800">Recommended next steps</h3>
               <ul id="recommendation-list" class="mt-3 space-y-2.5"></ul>
             </div>
+            <section class="mt-6 border-t border-slate-100 pt-5" aria-labelledby="nutrition-recommendations-heading">
+              <div class="flex items-center justify-between gap-3">
+                <div>
+                  <p class="text-[10px] font-bold uppercase tracking-[.15em] text-emerald-700">PERSONALIZED FOR YOUR SCHEDULE</p>
+                  <h3 id="nutrition-recommendations-heading" class="mt-1 text-base font-semibold text-slate-900">Nutrition Recommendations</h3>
+                </div>
+                <a href="diet.html" class="text-xs font-semibold text-circadia-indigo underline underline-offset-2">Diet guide</a>
+              </div>
+              <div id="nutrition-recommendation-list" class="mt-3 grid gap-3 sm:grid-cols-2"></div>
+            </section>
             <p class="mt-6 border-t border-slate-100 pt-4 text-[11px] leading-5 text-slate-400">Sleep and REM estimates are model-generated, can be inaccurate, and are not medical advice. They cannot guarantee REM sleep or replace guidance from a qualified health professional.</p>
           </div>
         </article>
@@ -246,6 +363,7 @@
         const analyzeButton = document.querySelector("#analyze-button");
         const analyzeLabel = document.querySelector("#analyze-label");
         const formStatus = document.querySelector("#form-status");
+        const privacyBanner = document.querySelector("#privacy-banner");
         let currentFile = null;
         let isSubmitting = false;
 
@@ -319,6 +437,14 @@
             ? (payload.report && typeof payload.report === "object" ? payload.report : payload)
             : {};
           const schedule = report.schedule && typeof report.schedule === "object" ? report.schedule : {};
+          const sleepDuration = firstValue(
+            report.sleep_duration_hours,
+            report.estimated_sleep_hours,
+            report.total_sleep_hours,
+            report.sleep_duration,
+            schedule.sleep_duration_hours,
+            schedule.duration_hours
+          );
           const rem = firstValue(
             report.estimated_rem_sleep,
             report.estimated_rem_minutes,
@@ -362,9 +488,116 @@
             ),
             rem,
             remUnit,
+            sleepDuration,
             confidence: firstValue(report.confidence, report.confidence_score, report.model_confidence),
             recommendations
           };
+        }
+
+        function parseClockTime(value) {
+          if (typeof value !== "string") return null;
+          const match = value.match(/(?:T|\s)?(\d{1,2}):(\d{2})/);
+          if (!match) return null;
+          const hour = Number(match[1]);
+          const minute = Number(match[2]);
+          if (hour > 23 || minute > 59) return null;
+          return hour * 60 + minute;
+        }
+
+        function durationInHours(value, bedtime, wakeTime) {
+          if (typeof value === "number" && Number.isFinite(value) && value > 0 && value <= 24) return value;
+          if (typeof value === "string") {
+            const numeric = Number(value);
+            if (Number.isFinite(numeric) && numeric > 0 && numeric <= 24) return numeric;
+            const duration = value.match(/^(\d{1,2}):(\d{2})$/);
+            if (duration) return Number(duration[1]) + Number(duration[2]) / 60;
+          }
+          const start = parseClockTime(bedtime);
+          const end = parseClockTime(wakeTime);
+          if (start === null || end === null) return null;
+          const minutes = (end - start + 1440) % 1440;
+          return minutes > 0 ? minutes / 60 : null;
+        }
+
+        function formatClockTime(minutes) {
+          const value = ((minutes % 1440) + 1440) % 1440;
+          const hour = Math.floor(value / 60);
+          const minute = value % 60;
+          const suffix = hour < 12 ? "AM" : "PM";
+          return `${hour % 12 || 12}:${String(minute).padStart(2, "0")} ${suffix}`;
+        }
+
+        function minutesBefore(time, amount) {
+          const minutes = parseClockTime(time);
+          return minutes === null ? null : formatClockTime(minutes - amount);
+        }
+
+        function renderSleepScore(duration) {
+          const value = document.querySelector("#sleep-score-value");
+          const ring = document.querySelector("#sleep-score-ring");
+          const status = document.querySelector("#sleep-score-status");
+          const detail = document.querySelector("#sleep-score-detail");
+          const svgDescription = document.querySelector("#score-svg-description");
+          if (duration === null) {
+            value.textContent = "—";
+            status.textContent = "Duration unavailable";
+            detail.textContent = "A sleep duration was not available, so we could not estimate a score.";
+            ring.style.strokeDashoffset = "301.6";
+            svgDescription.textContent = "Sleep score is unavailable because sleep duration was not provided.";
+            return;
+          }
+          const score = Math.max(0, Math.min(100, Math.round(100 - Math.abs(duration - 8) * (duration < 8 ? 18 : 13))));
+          const label = score >= 80 ? "Excellent" : score >= 60 ? "Fair" : "Needs Improvement";
+          const tone = score >= 80 ? "excellent" : score >= 60 ? "fair" : "needs-improvement";
+          const color = score >= 80 ? "#047857" : score >= 60 ? "#B45309" : "#B91C1C";
+          value.textContent = String(score);
+          status.textContent = label;
+          status.dataset.tone = tone;
+          detail.textContent = `Estimated ${duration.toFixed(1)} hours of sleep; general adult guidance is 7–9 hours.`;
+          ring.style.stroke = color;
+          ring.style.strokeDashoffset = String(301.6 * (1 - score / 100));
+          svgDescription.textContent = `Sleep score ${score} out of 100, status ${label}.`;
+        }
+
+        function renderNutritionRecommendations(wakeTime, bedtime, sleepDuration) {
+          const container = document.querySelector("#nutrition-recommendation-list");
+          container.replaceChildren();
+          const wakeMinutes = parseClockTime(wakeTime);
+          const bedtimeMinutes = parseClockTime(bedtime) ?? (wakeMinutes === null ? null : (wakeMinutes - 8 * 60 + 1440) % 1440);
+          const recommendationBedtime = bedtimeMinutes === null ? null : formatClockTime(bedtimeMinutes);
+          const caffeineCutoff = minutesBefore(recommendationBedtime, 8 * 60);
+          const dinnerTime = minutesBefore(recommendationBedtime, 3 * 60);
+          const durationNote = sleepDuration !== null && sleepDuration < 7
+            ? ` Your estimated ${sleepDuration.toFixed(1)}-hour sleep window is shorter than the general adult 7–9 hour range.`
+            : sleepDuration !== null && sleepDuration > 9
+              ? ` Your estimated ${sleepDuration.toFixed(1)}-hour sleep window is longer than the general adult 7–9 hour range; individual needs can vary.`
+              : "";
+          const bedtimeNote = bedtimeMinutes === null ? "" : " Times are based on your estimated bedtime.";
+          const recommendations = [
+            { icon: "☕", title: "Caffeine cutoff", text: caffeineCutoff ? `Try to have your last caffeine by ${caffeineCutoff}, about 8 hours before bedtime.${bedtimeNote}` : "Consider stopping caffeine at least 8 hours before your usual bedtime." },
+            { icon: "🍽", title: "Dinner timing", text: dinnerTime ? `Aim to finish dinner around ${dinnerTime}, roughly 3 hours before bedtime.${bedtimeNote}` : "Try to finish dinner 2–3 hours before your usual bedtime." },
+            { icon: "💧", title: "Hydration rhythm", text: `Drink regularly through the day${wakeMinutes === null ? "" : `, starting around ${formatClockTime(wakeMinutes)}`}, then ease off in the last 2 hours before bed to limit sleep interruptions.${bedtimeNote}` },
+            { icon: "🌙", title: "Evening snack", text: "If you are hungry, choose a light snack such as a banana, a few almonds, or oatmeal 30–60 minutes before bed." },
+            { icon: "🥗", title: "Foods to go easy on", text: `Limit late caffeine, alcohol, large meals, and very spicy or sugary foods near bedtime.${durationNote}` }
+          ];
+          recommendations.forEach((recommendation) => {
+            const card = document.createElement("article");
+            card.className = "rounded-xl border border-emerald-100 bg-gradient-to-br from-white to-emerald-50/60 p-3.5 shadow-sm";
+            const heading = document.createElement("h4");
+            heading.className = "flex items-center gap-2 text-sm font-semibold text-slate-800";
+            const icon = document.createElement("span");
+            icon.className = "grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white text-base shadow-sm";
+            icon.setAttribute("aria-hidden", "true");
+            icon.textContent = recommendation.icon;
+            const title = document.createElement("span");
+            title.textContent = recommendation.title;
+            heading.append(icon, title);
+            const description = document.createElement("p");
+            description.className = "mt-2 text-xs leading-5 text-slate-600";
+            description.textContent = recommendation.text;
+            card.append(heading, description);
+            container.append(card);
+          });
         }
 
         function timeToTimelinePosition(value) {
@@ -436,6 +669,8 @@
           document.querySelector("#report-summary").textContent = String(summary);
           document.querySelector("#recommended-bedtime").textContent = displayValue(report.bedtime, "Not provided");
           document.querySelector("#recommended-wake").textContent = displayValue(report.wakeTime, "Not provided");
+          const sleepDuration = durationInHours(report.sleepDuration, report.bedtime, report.wakeTime);
+          renderSleepScore(sleepDuration);
           document.querySelector("#estimated-rem").textContent = displayRem(report.rem, report.remUnit, payload?.report || payload || {});
           document.querySelector("#analysis-confidence").textContent = typeof confidence === "number"
             ? `${Math.round(confidence <= 1 ? confidence * 100 : confidence)}%`
@@ -445,6 +680,7 @@
           document.querySelector("#report-empty").classList.add("hidden");
           document.querySelector("#report-content").classList.remove("hidden");
           appendRecommendations(report.recommendations);
+          renderNutritionRecommendations(report.wakeTime, report.bedtime, sleepDuration);
           renderTimeline(report.bedtime, report.wakeTime);
           document.querySelector("#report").scrollIntoView({ behavior: "smooth", block: "start" });
         }
@@ -458,6 +694,21 @@
 
         fileInput.addEventListener("change", () => setFile(fileInput.files?.[0]));
         document.querySelector("#remove-file").addEventListener("click", clearFile);
+        try {
+          if (window.localStorage.getItem("circadia-privacy-dismissed") === "true") {
+            privacyBanner.classList.add("hidden");
+          }
+        } catch (error) {
+          console.warn("Could not read the privacy-banner preference.", error);
+        }
+        document.querySelector("#dismiss-privacy").addEventListener("click", () => {
+          privacyBanner.classList.add("hidden");
+          try {
+            window.localStorage.setItem("circadia-privacy-dismissed", "true");
+          } catch (error) {
+            console.warn("Could not save the privacy-banner preference.", error);
+          }
+        });
 
         for (const eventName of ["dragenter", "dragover"]) {
           dropzone.addEventListener(eventName, (event) => {
