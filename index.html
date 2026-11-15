@@ -3,9 +3,12 @@ ssss<!doctype html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#F4F7F7">
+    <meta name="theme-color" content="#0B1120">
     <meta name="description" content="Upload sleep data and receive a personalized sleep schedule report.">
     <title>Circadia — a better morning starts tonight</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -22,7 +25,8 @@ ssss<!doctype html>
               }
             },
             fontFamily: {
-              sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+              sans: ["DM Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+              display: ["Lora", "Georgia", "serif"]
             }
           }
         }
@@ -34,6 +38,12 @@ ssss<!doctype html>
         background-color: #070B16;
         background-image: linear-gradient(180deg, #10182A 0%, #0B1120 48%, #070B16 100%);
         color: #E2E8F0;
+      }
+      h1, h2, h3 {
+        text-shadow:
+          0 0 8px rgba(165, 180, 252, .38),
+          0 0 26px rgba(129, 140, 248, .3),
+          0 0 42px rgba(99, 102, 241, .18);
       }
       header {
         background-color: rgba(8, 15, 30, .92) !important;
@@ -88,8 +98,57 @@ ssss<!doctype html>
         color-scheme: dark;
       }
       body header a[href="#upload"] {
-        background-color: #F59E0B;
-        color: #111827;
+        background-color: rgba(165, 180, 252, .12);
+        border: 1px solid rgba(165, 180, 252, .24);
+        color: #E2E8F0;
+        font-weight: 500;
+        transition: background-color .2s ease, color .2s ease, text-shadow .2s ease;
+      }
+      body header a[href="#upload"]:hover {
+        background-color: rgba(165, 180, 252, .2);
+        color: #FFFFFF;
+        text-shadow: 0 0 12px rgba(199, 210, 254, .8);
+      }
+      .brand-mark {
+        background: linear-gradient(145deg, #6366F1, #3730A3) !important;
+        box-shadow: 0 5px 20px rgba(99, 102, 241, .3);
+        transition: transform .22s ease, box-shadow .22s ease;
+      }
+      .brand-name {
+        transition: color .22s ease, text-shadow .22s ease;
+      }
+      body header a[aria-label="Circadia home"]:hover .brand-mark {
+        box-shadow: 0 0 24px rgba(129, 140, 248, .55);
+        transform: translateY(-2px) rotate(-5deg);
+      }
+      body header a[aria-label="Circadia home"]:hover .brand-name {
+        color: #C7D2FE;
+        text-shadow: 0 0 16px rgba(165, 180, 252, .45);
+      }
+      .nav-link {
+        position: relative;
+        transition: color .2s ease, transform .2s ease;
+      }
+      .nav-link::after {
+        position: absolute;
+        right: 0;
+        bottom: -7px;
+        left: 0;
+        height: 2px;
+        border-radius: 9999px;
+        background: #F59E0B;
+        content: "";
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .2s ease;
+      }
+      body header a.nav-link:hover {
+        color: #FDE68A !important;
+        transform: translateY(-1px);
+      }
+      .nav-link:hover::after,
+      .nav-link:focus-visible::after {
+        transform: scaleX(1);
       }
       .drop-active {
         border-color: #818CF8 !important;
@@ -101,12 +160,12 @@ ssss<!doctype html>
         left: 0;
         z-index: 60;
         display: none;
-        width: 12px;
-        height: 12px;
-        border: 1px solid rgba(255, 255, 255, .9);
+        width: 22px;
+        height: 22px;
         border-radius: 9999px;
-        background: #FDE68A;
-        box-shadow: 0 0 10px 3px rgba(253, 230, 138, .48), 0 0 28px 8px rgba(165, 180, 252, .24);
+        background: radial-gradient(circle, rgba(255, 244, 128, .95) 0%, rgba(255, 214, 48, .72) 30%, rgba(255, 196, 0, .28) 65%, rgba(255, 196, 0, 0) 100%);
+        box-shadow: 0 0 22px 10px rgba(255, 210, 35, .3);
+        filter: blur(2px);
         opacity: 0;
         pointer-events: none;
         transform: translate(-50%, -50%);
@@ -145,18 +204,18 @@ ssss<!doctype html>
     <header class="border-b border-slate-200/80 bg-white">
       <nav class="mx-auto flex h-[82px] max-w-[1280px] items-center justify-between gap-5 px-5 sm:px-8" aria-label="Main navigation">
         <a href="#" class="flex shrink-0 items-center gap-3 no-underline" aria-label="Circadia home">
-          <span class="grid h-11 w-11 place-items-center rounded-xl bg-navy text-white">
+          <span class="brand-mark grid h-11 w-11 place-items-center rounded-xl text-white">
             <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
               <path d="M20 15.4A8.3 8.3 0 0 1 8.6 4a8.6 8.6 0 1 0 11.4 11.4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M16.5 4.5v4m-2-2h4" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
           </span>
-          <span class="text-[21px] font-bold tracking-[-.7px]">Circadia</span>
+          <span class="brand-name text-[21px] font-bold tracking-[-.7px]">Circadia</span>
         </a>
         <div class="flex items-center gap-4 sm:gap-8">
-          <a href="#how-it-works" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">How it works</a>
-          <a href="#tips-guide" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">Tips &amp; guide</a>
-          <a href="#report" class="hidden text-sm font-medium text-slate-600 transition hover:text-circadia-indigo sm:inline">Your report</a>
+          <a href="#how-it-works" class="nav-link hidden text-sm font-medium text-slate-600 sm:inline">How it works</a>
+          <a href="#tips-guide" class="nav-link hidden text-sm font-medium text-slate-600 sm:inline">Tips &amp; guide</a>
+          <a href="#report" class="nav-link hidden text-sm font-medium text-slate-600 sm:inline">Your report</a>
           <a href="#upload" class="rounded-lg bg-navy px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 sm:px-5">Analyze my sleep</a>
         </div>
       </nav>
@@ -167,7 +226,7 @@ ssss<!doctype html>
         <p class="inline-flex items-center gap-2 text-[11px] font-bold tracking-[.19em] text-circadia-indigo">
           <span class="h-px w-5 bg-circadia-indigo"></span> A CLEARER WAY TO WIND DOWN
         </p>
-        <h1 id="page-title" class="mt-4 text-[38px] font-semibold leading-[1.1] tracking-[-1.8px] text-navy sm:text-[50px]">
+        <h1 id="page-title" class="mt-4 font-display text-[38px] font-semibold leading-[1.1] tracking-[-1.8px] text-navy sm:text-[50px]">
           A better morning<br class="hidden sm:block"> starts tonight.
         </h1>
         <p class="mt-4 max-w-[670px] text-[16px] leading-7 text-slate-600 sm:text-[18px]">
@@ -329,7 +388,7 @@ ssss<!doctype html>
         <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p class="text-[10px] font-bold tracking-[.2em] text-amber-300">SMALL STEPS, STEADIER SLEEP</p>
-            <h2 id="tips-title" class="mt-2 text-2xl font-semibold tracking-[-.6px]">A few tips for a calmer night</h2>
+            <h2 id="tips-title" class="mt-2 font-display text-2xl font-semibold tracking-[-.6px]">A few tips for a calmer night</h2>
           </div>
           <p class="max-w-[430px] text-sm leading-6 text-slate-300">Simple habits can support a more consistent routine. Find what works for you and keep it manageable.</p>
         </div>
